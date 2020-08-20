@@ -1,0 +1,54 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.RELEASE")
+}
+
+dependencies {
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+	compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
+	compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.28'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+
+	// compile 'io.springfox:springfox-swagger2:2.9.2'
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui0
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+	// compile group: 'org.springframework.plugin', name:'spring-plugin-core', version: '1.2.0.RELEASE'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.4.4'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard'
+
+
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+	
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
